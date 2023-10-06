@@ -18,6 +18,7 @@ pub unsafe fn abort() {
     ) {
         Ok(_) => {}
         Err(e) => {
+            // panic!("sigaction: {e}");
             eprintln!("sigprocmask: {e}");
             process::exit(libc::EXIT_FAILURE);
         }
@@ -81,4 +82,3 @@ fn cleanup_and_raise_sigabort() {
     // Raise SIGABRT
     nix::sys::signal::raise(Signal::SIGABRT).expect("raise");
 }
-
